@@ -15,6 +15,7 @@ import qualified Data.List as List
 import Data.Maybe
 import Data.Map (Map)
 import qualified Data.Map as Map
+import Data.Ord.Unicode
 import Data.Set (Set)
 import qualified Data.Set as Set
 import Data.Monoid
@@ -48,7 +49,11 @@ mkLens name v0 =
                         foldl AppT (ConT v0) (VarT <$> vs0),
                         foldl AppT (ConT v0) (VarT <$> (vs0 /. vm)),
                         t, t /. vm]) <$>
-          foldrM (\ v m -> flip (Map.insert v) m <$> newName (nameBase v)) Map.empty (freeTypeVars t)
+           foldrM (\ v m -> flip (Map.insert v) m <$> newName (nameBase v)) Map.empty
+           (Set.filter
+            (\ v ->
+             -- can not make lens polymorphic in type variable shared between multiple labels
+             (≤ 1) ∘ length $ List.filter (fst & snd & freeTypeVars & (v ∈)) labels) (freeTypeVars t))
 
         goX :: ((Name, Type), [Name]) -> Q Exp
         goX ((v, t), us) =
