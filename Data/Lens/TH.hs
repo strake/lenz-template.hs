@@ -29,7 +29,7 @@ reifyTyConDec :: Name -> Q ([TyVarBndr], [Con])
 reifyTyConDec =
     fmap (\ case TyConI (DataD    _ _ bs _ cs _) -> (bs, cs)
                  TyConI (NewtypeD _ _ bs _ c  _) -> (bs, [c])
-                 _ -> error "name of no simple type constructor") ∘ reify
+                 x -> error ("name of no simple type constructor: " ++ show x)) ∘ reify
 
 mkLens :: ([Char] -> [Char]) -> Name -> Q [Dec]
 mkLens name v0 =
