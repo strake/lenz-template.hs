@@ -1,5 +1,5 @@
 name:		lenz-template
-version:	0.1.0.1
+version:	0.2.0.0
 synopsis:	Van Laarhoven lens templates
 license:	OtherLicense
 license-file:	LICENSE
@@ -10,6 +10,6 @@ build-type:	Simple
 cabal-version:	>=1.4
 
 library
-  exposed-modules:	Data.Lens.TH
-  build-depends:	base >= 4.9 && < 4.11, base-unicode-symbols >= 0.1 && < 0.3, template-haskell >= 2.11 && < 2.13, containers >= 0.5 && < 0.6, lenz >= 0.1 && < 0.2
+  exposed-modules:	Control.Lens.TH
+  build-depends:	base >= 4.9 && < 4.11, base-unicode-symbols >= 0.1 && < 0.3, template-haskell >= 2.11 && < 2.13, containers >= 0.5 && < 0.6, lenz >= 0.2 && < 0.3
   extensions:		LambdaCase, MultiParamTypeClasses, FlexibleInstances

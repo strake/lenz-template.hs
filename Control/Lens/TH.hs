@@ -1,16 +1,16 @@
 {-# LANGUAGE ViewPatterns, TemplateHaskell #-}
 
-module Data.Lens.TH (mkLens) where
+module Control.Lens.TH (mkLens) where
 
 import Prelude hiding (concat, concatMap, foldr, foldl, foldl1)
 
 import Control.Applicative
 import Control.Arrow
 import Control.Category.Unicode
+import Control.Lens
 import Control.Monad
 import Data.Bool (bool)
 import Data.Function (on)
-import Data.Lens
 import qualified Data.List as List
 import Data.Maybe
 import Data.Map (Map)
@@ -45,7 +45,7 @@ mkLens name v0 =
         goT ((v, t), us) =
           (\ vm ->
            ForallT (liftA2 List.union id (fmap (/. vm)) bs) [] $
-           foldl1 AppT [ConT ''Data.Lens.Lens,
+           foldl1 AppT [ConT ''Control.Lens.Lens,
                         foldl AppT (ConT v0) (VarT <$> vs0),
                         foldl AppT (ConT v0) (VarT <$> (vs0 /. vm)),
                         t, t /. vm]) <$>
@@ -59,7 +59,7 @@ mkLens name v0 =
         goX ((v, t), us) =
           (\ (u, w) ->
            foldl1 AppE
-           [VarE 'Data.Lens.lens,
+           [VarE 'Control.Lens.lens,
             LamCaseE ((\ u -> Match (RecP u [(v, VarP w)]) (NormalB $ VarE w) []) <$> us),
             LamE [VarP w, VarP u] (RecUpdE (VarE u) [(v, VarE w)])]) <$> liftA2 (,) (newName "u") (newName "v")
     in (traverse
