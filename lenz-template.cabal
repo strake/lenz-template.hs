@@ -10,6 +10,13 @@ build-type:	Simple
 cabal-version:	>=1.4
 
 library
-  exposed-modules:	Control.Lens.TH
-  build-depends:	base >= 4.9 && < 4.11, base-unicode-symbols >= 0.1 && < 0.3, template-haskell >= 2.11 && < 2.13, containers >= 0.5 && < 0.6, lenz >= 0.2 && < 0.4
-  extensions:		LambdaCase, MultiParamTypeClasses, FlexibleInstances
+  exposed-modules:      Control.Lens.TH
+  build-depends:        base >= 4.9 && < 5
+                      , base-unicode-symbols >= 0.1 && < 0.3
+                      , template-haskell >= 2.11 && < 2.15
+                      , containers >= 0.5 && < 0.7
+                      , lenz >= 0.2 && < 0.5
+  extensions:
+    LambdaCase
+    MultiParamTypeClasses
+    FlexibleInstances
