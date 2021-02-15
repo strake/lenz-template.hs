@@ -13,7 +13,7 @@ library
   exposed-modules:      Control.Lens.TH
   build-depends:        base >= 4.9 && < 5
                       , base-unicode-symbols >= 0.1 && < 0.3
-                      , template-haskell >= 2.11 && < 2.15
+                      , template-haskell >= 2.11 && < 2.17
                       , containers >= 0.5 && < 0.7
                       , lenz >= 0.2 && < 0.5
   extensions:
